@@ -1,14 +1,18 @@
 -- The Box by Arjun Unni --
 
-Controls:
+Description:
+  This is a small game made by me on a very boring day. Rules are simple: Collect the violet boxes, Avoid the blue boxes, and reach the white box.
+  
+  You can fork it and do whatever you want with it!
 
+Controls:
 �Arrow Keys to move
 
-Credits:
+Thanks to:
 
 �Daniel Weatherall for the bgmusic (8 bit breakbeat www.youtube.com/watch?v=L9qG2ATnX68)
+
 �Silverbolt for the key sprite (http://z6.invisionfree.com/SpriteTeachForums/index.php?showtopic=19)
 
-All other images has been made by me(as far as i know)
-
 Made with Slick2D library and LWJGL
+
