@@ -11,15 +11,15 @@ public class Play extends BasicGameState{
 	//-> Make 5 more levels
 	//-> Add enemies(Now that's a challenge)
 	//-> Add those items which you pick up
-	
+		
 		Image box;
 		int boxX;
 		int boxY;
 		Rectangle boxrect = new Rectangle(boxX, boxY, 25, 25);
 		int lives = 3;
+		int score = 0;
 		
 		//All variables for collection of blocks
-		int score = 0;
 		boolean allboxescollected = false;
 		Rectangle c1 = new Rectangle(42, 275, 25, 25);
 		Rectangle c2 = new Rectangle(141, 288, 25, 25);
@@ -186,7 +186,7 @@ public class Play extends BasicGameState{
 			if(allboxescollected == true){
 				if((boxX > 540) && (boxY > 260)){
 					try{
-						Thread.sleep(3000);
+						Thread.sleep(1000);
 					}
 					catch(Exception e){
 						e.getStackTrace();
@@ -245,7 +245,4 @@ public class Play extends BasicGameState{
 			return 1;
 		}
 		
-		public int getScore(){
-			return score;
-		}
 }

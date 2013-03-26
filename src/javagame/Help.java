@@ -21,9 +21,13 @@ public class Help extends BasicGameState{
 			g.drawImage(face, 250, 45);
 			g.drawString("You should reach here.", 100, 120);
 			g.fillRect(300, 120, 25, 25);
-			g.drawString("aand you should collect these.", 150, 200);
+			g.drawString("You should collect these.", 150, 200);
 			g.setColor(Color.magenta);
 			g.fillRect(450, 200,25, 25);
+			g.setColor(Color.white);
+			g.drawString("and beware of these guys.", 150, 250);
+			g.setColor(Color.cyan);
+			g.fillRect(380, 250, 25, 25);
 			g.setColor(Color.white);
 			g.drawString("Easy right? Press Enter to play", 241, 314);
 			

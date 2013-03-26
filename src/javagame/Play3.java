@@ -366,7 +366,7 @@ public class Play3 extends BasicGameState{
 					catch(Exception e){
 						e.getStackTrace();
 					}
-					sbg.enterState(0);
+					sbg.enterState(6);
 				}
 			}
 			

@@ -6,7 +6,6 @@ import org.newdawn.slick.geom.*;
 
 public class Play2 extends BasicGameState{
 
-		Play p = new Play(1);
 		Image box;
 		int boxX = 10;
 		int boxY = 10;
@@ -23,8 +22,7 @@ public class Play2 extends BasicGameState{
 		Rectangle boxrect = new Rectangle(boxX, boxY, 25, 25);
 		
 		//Variables for collectibles
-				int sc = p.getScore();
-				int score = sc;
+				int score = 0;
 				boolean allboxescollected = false;
 				Rectangle c1 = new Rectangle(48, 167, 25, 25);
 				Rectangle c2 = new Rectangle(156, 211, 25, 25);
@@ -52,7 +50,6 @@ public class Play2 extends BasicGameState{
 		
 		public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 			box = new Image("res/box.png");
-			
 		}
 		
 		public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
@@ -123,7 +120,7 @@ public class Play2 extends BasicGameState{
 			}
 			if(boxrect.intersects(c3)){
 				if(scoreIt3 == true){
-					score += 10;
+					score+= 10;
 					scoreIt3 = false;
 				}
 				drawIt3 = false;
@@ -183,7 +180,6 @@ public class Play2 extends BasicGameState{
 			
 			if(allboxescollected == true){
 				if((boxX > 540) && (boxY > 260)){
-					
 					try{
 						Thread.sleep(3000);
 					}

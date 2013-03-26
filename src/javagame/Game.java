@@ -12,6 +12,7 @@ public class Game extends StateBasedGame{
 	public static final int play2 = 3;
 	public static final int gOver = 4;
 	public static final int play3 = 5;
+	public static final int play4 = 6;
 	
 	public Game(String gamename){
 		
@@ -22,6 +23,7 @@ public class Game extends StateBasedGame{
 		this.addState(new Play2(play2));
 		this.addState(new GameOver(gOver));
 		this.addState(new Play3(play3));
+		this.addState(new Play4(play4));
 		
 	}
 	
@@ -33,6 +35,7 @@ public class Game extends StateBasedGame{
 		this.getState(play2).init(gc, this);
 		this.getState(gOver).init(gc, this);
 		this.getState(play3).init(gc,this);
+		this.getState(play4).init(gc,this);
 		this.enterState(menu);
 	}
 	

@@ -44,7 +44,7 @@ public class Menu extends BasicGameState{
 				sbg.enterState(2);
 			}
 			if(input.isKeyDown(Input.KEY_O)){
-				sbg.enterState(5);
+				sbg.enterState(6);
 			}
 			if(input.isKeyDown(Input.KEY_PAUSE)){
 				bgMusic.pause();
