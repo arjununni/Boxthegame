@@ -1,4 +1,4 @@
-<h2>-- The Box by Arjun Unni --</h2>
+<h2>The Box</h2>
 
 
 <h2>Description:</h2>
@@ -14,7 +14,7 @@ Download box.jar for the game.
 <li>Arrow Keys to move</li>
 </ul>
 
-Thanks to:
+<h2>Thanks to:</h2>
 
 <ul>
 <li>Daniel Weatherall for the bgmusic (8 bit breakbeat www.youtube.com/watch?v=L9qG2ATnX68)</li>
