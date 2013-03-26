@@ -5,15 +5,16 @@ import org.newdawn.slick.state.*;
 import org.newdawn.slick.geom.*;
 
 public class Play4 extends BasicGameState{
-
+	
+		int timer = 0;
 		Image box;
+		Image coin;
 		int boxX = 2;
 		int boxY = 157;
 		int lives = 3;
 		Rectangle boxrect = new Rectangle(boxX, boxY, 25, 25);
 		
 		//Variables for collectibles
-				int score = 0;
 				boolean allboxescollected = false;
 				Rectangle c1 = new Rectangle(133, 313, 25, 25);
 				Rectangle c2 = new Rectangle(183, 33, 25, 25);
@@ -83,7 +84,7 @@ public class Play4 extends BasicGameState{
 		
 		public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 			box = new Image("res/box.png");
-			
+			coin = new Image("res/coin.png");
 			
 				
 		}
@@ -100,7 +101,7 @@ public class Play4 extends BasicGameState{
 				i++;
 				livesX += 20;
 			}
-			g.drawString("Score: "+score, 470, 15);
+			g.drawString("Score: "+Game.gscore, 470, 15);
 			g.drawString("Level 3", 270, 10);
 
 			//Enemy
@@ -115,13 +116,13 @@ public class Play4 extends BasicGameState{
 			
 			//Collectibles
 			g.setColor(Color.magenta);
-			if(drawIt1 == true){g.fill(c1);}
-			if(drawIt2 == true){g.fill(c2);}
-			if(drawIt3 == true){g.fill(c3);}
-			if(drawIt4 == true){g.fill(c4);}
-			if(drawIt5 == true){g.fill(c5);}
-			if(drawIt6 == true){g.fill(c6);}
-			if(drawIt7 == true){g.fill(c7);}
+			if(drawIt1 == true){g.drawImage(coin, 133, 313);}
+			if(drawIt2 == true){g.drawImage(coin, 183, 33);}
+			if(drawIt3 == true){g.drawImage(coin, 213, 313);}
+			if(drawIt4 == true){g.drawImage(coin, 253, 33);}
+			if(drawIt5 == true){g.drawImage(coin, 293, 313);}
+			if(drawIt6 == true){g.drawImage(coin, 333, 33);}
+			if(drawIt7 == true){g.drawImage(coin, 373, 313);}
 			
 			
 			g.setColor(Color.white);
@@ -140,12 +141,10 @@ public class Play4 extends BasicGameState{
 		public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
 			Input input = gc.getInput();
 			
-			try{
-				Thread.sleep(5);
-			}
-			catch(Exception e){
-				
-			}
+			timer += delta;
+			
+			while(timer > 5){
+				timer -= 5;
 			
 			//ENEMYS GOING DOWN
 			
@@ -265,49 +264,49 @@ public class Play4 extends BasicGameState{
 			
 			if(boxrect.intersects(c1)){
 				if(scoreIt1 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt1 = false;
 				}
 				drawIt1 = false;
 			}
 			if(boxrect.intersects(c2)){
 				if(scoreIt2 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt2 = false;
 				}
 				drawIt2 = false;
 			}
 			if(boxrect.intersects(c3)){
 				if(scoreIt3 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt3 = false;
 				}
 				drawIt3 = false;
 			}
 			if(boxrect.intersects(c4)){
 				if(scoreIt4 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt4 = false;
 				}
 				drawIt4 = false;
 			}
 			if(boxrect.intersects(c5)){
 				if(scoreIt5 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt5 = false;
 				}
 				drawIt5 = false;
 			}
 			if(boxrect.intersects(c6)){
 				if(scoreIt6 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt6 = false;
 				}
 				drawIt6 = false;
 			}
 			if(boxrect.intersects(c7)){
 				if(scoreIt7 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt7 = false;
 				}
 				drawIt7 = false;
@@ -317,21 +316,23 @@ public class Play4 extends BasicGameState{
 				allboxescollected = true;
 			}
 			
-			if(input.isKeyDown(Input.KEY_UP)){
-				boxY -= 1;
-				boxrect.setY(boxY);
-			}
-			if(input.isKeyDown(Input.KEY_DOWN)){
-				boxY += 1;
-				boxrect.setY(boxY);
-			}
-			if(input.isKeyDown(Input.KEY_LEFT)){
-				boxX -= 1;
-				boxrect.setX(boxX);
-			}
-			if(input.isKeyDown(Input.KEY_RIGHT)){
-				boxX += 1;
-				boxrect.setX(boxX);
+			if(quit == false){
+				if(input.isKeyDown(Input.KEY_UP)){
+					boxY -= 1;
+					boxrect.setY(boxY);
+				}
+				if(input.isKeyDown(Input.KEY_DOWN)){
+					boxY += 1;
+					boxrect.setY(boxY);
+				}
+				if(input.isKeyDown(Input.KEY_LEFT)){
+					boxX -= 1;
+					boxrect.setX(boxX);
+				}
+				if(input.isKeyDown(Input.KEY_RIGHT)){
+					boxX += 1;
+					boxrect.setX(boxX);
+				}
 			}
 			
 			if(boxY < 30){
@@ -394,6 +395,7 @@ public class Play4 extends BasicGameState{
 			
 			if(lives == 0){
 				sbg.enterState(4);
+			}
 			}
 			
 		}

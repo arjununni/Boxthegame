@@ -11,13 +11,16 @@ public class Play extends BasicGameState{
 	//-> Make 5 more levels
 	//-> Add enemies(Now that's a challenge)
 	//-> Add those items which you pick up
+	
 		
-		Image box;
+		Animation box, movLeft, movRight, movUp, movDown, noMov; 
+		int[] duration = {200,200};
+		Image coin;
 		int boxX;
 		int boxY;
 		Rectangle boxrect = new Rectangle(boxX, boxY, 25, 25);
 		int lives = 3;
-		int score = 0;
+		int timer = 0;
 		
 		//All variables for collection of blocks
 		boolean allboxescollected = false;
@@ -46,10 +49,22 @@ public class Play extends BasicGameState{
 		}
 		
 		public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
-			box = new Image("res/box.png");
+			Image[] boxleft = {new Image("res/box.png"), new Image("res/box.png")};
+			Image[] boxright = {new Image("res/box.png"), new Image("res/box.png")};
+			Image[] boxup = {new Image("res/box.png"), new Image("res/box.png")};
+			Image[] boxdown = {new Image("res/box.png"), new Image("res/box.png")};
+			Image[] boxidle = {new Image("res/box.png"), new Image("res/box.png")};
+			
+			movLeft = new Animation(boxleft, duration, false);
+			movRight = new Animation(boxright, duration, false);
+			movUp = new Animation(boxup, duration, false);
+			movDown = new Animation(boxdown, duration, false);
+			noMov = new Animation(boxidle, duration, false);
+			box = noMov;
+			
 			boxX = 10;
 			boxY = 10;
-			
+			coin = new Image("res/coin.png");
 		}
 		
 		public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
@@ -65,10 +80,10 @@ public class Play extends BasicGameState{
 				i++;
 				livesX += 20;
 			}
-			g.drawString("Score: "+score, 470, 15);
+			g.drawString("Score: "+Game.gscore, 470, 15);
 			g.drawString("Level 1", 270, 20);
 			g.fillRect(560, 300, 150, 150);
-			g.drawImage(box, boxX, boxY);
+			box.draw(boxX, boxY);
 			g.drawString("X:"+boxX+" Y:"+boxY, 170, 10);
 			
 			//Walls
@@ -77,12 +92,11 @@ public class Play extends BasicGameState{
 			g.fillRect(200, 100, 50, 260);
 			
 			//Collectibles
-			g.setColor(Color.magenta);
-			if(drawIt1 == true){g.fill(c1);}
-			if(drawIt2 == true){g.fill(c2);}
-			if(drawIt3 == true){g.fill(c3);}
-			if(drawIt4 == true){g.fill(c4);}
-			if(drawIt5 == true){g.fill(c5);}
+			if(drawIt1 == true){g.drawImage(coin, 42, 275);}
+			if(drawIt2 == true){g.drawImage(coin, 141, 288);}
+			if(drawIt3 == true){g.drawImage(coin, 156, 105);}
+			if(drawIt4 == true){g.drawImage(coin, 171, 25);}
+			if(drawIt5 == true){g.drawImage(coin, 301, 241);}
 			
 			g.setColor(Color.white);
 			
@@ -99,44 +113,42 @@ public class Play extends BasicGameState{
 		public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
 			Input input = gc.getInput();
 			
-			try{
-				Thread.sleep(5);
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
+			timer += delta;
+			
+			while(timer > 5){
+				timer -= 5;
 			
 			if(boxrect.intersects(c1)){
 				if(scoreIt1 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt1 = false;
 				}
 				drawIt1 = false;
 			}
 			if(boxrect.intersects(c2)){
 				if(scoreIt2 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt2 = false;
 				}
 				drawIt2 = false;
 			}
 			if(boxrect.intersects(c3)){
 				if(scoreIt3 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt3 = false;
 				}
 				drawIt3 = false;
 			}
 			if(boxrect.intersects(c4)){
 				if(scoreIt4 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt4 = false;
 				}
 				drawIt4 = false;
 			}
 			if(boxrect.intersects(c5)){
 				if(scoreIt5 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt5 = false;
 				}
 				drawIt5 = false;
@@ -146,22 +158,23 @@ public class Play extends BasicGameState{
 				allboxescollected = true;
 			}
 			
-			
-			if(input.isKeyDown(Input.KEY_UP)){
-				boxY -= 1;
-				boxrect.setY(boxY);
-			}
-			if(input.isKeyDown(Input.KEY_DOWN)){
-				boxY += 1;
-				boxrect.setY(boxY);
-			}
-			if(input.isKeyDown(Input.KEY_LEFT)){
-				boxX -= 1;
-				boxrect.setX(boxX);
-			}
-			if(input.isKeyDown(Input.KEY_RIGHT)){
-				boxX += 1;
-				boxrect.setX(boxX);
+			if(quit == false){
+				if(input.isKeyDown(Input.KEY_UP)){
+					boxY -= 1;
+					boxrect.setY(boxY);
+				}
+				if(input.isKeyDown(Input.KEY_DOWN)){
+					boxY += 1;
+					boxrect.setY(boxY);
+				}
+				if(input.isKeyDown(Input.KEY_LEFT)){
+					boxX -= 1;
+					boxrect.setX(boxX);
+				}
+				if(input.isKeyDown(Input.KEY_RIGHT)){
+					boxX += 1;
+					boxrect.setX(boxX);
+				}
 			}
 			
 			//Wall Collision Dectection. DO NOT MESS UP.
@@ -239,6 +252,7 @@ public class Play extends BasicGameState{
 				sbg.enterState(4);
 			}
 			
+			}
 		}
 		
 		public int getID(){

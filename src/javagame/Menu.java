@@ -36,6 +36,7 @@ public class Menu extends BasicGameState{
 				
 			if(input.isKeyDown(Input.KEY_ENTER)){
 				sbg.enterState(1);
+				bgMusic.stop();
 			}
 			if(input.isKeyDown(Input.KEY_Q)){
 				System.exit(0);

@@ -5,21 +5,22 @@ import org.newdawn.slick.state.*;
 import org.newdawn.slick.geom.*;
 
 public class Play3 extends BasicGameState{
-
+	
+		int timer = 0;
 		Image box;
 		Image key;
+		Image coin;
 		int boxX = -3;
 		int boxY = 313;
 		int lives = 3;
 		Rectangle boxrect = new Rectangle(boxX, boxY, 25, 25);
 		
 		//Variables for collectibles
-				int score = 0;
 				boolean allboxescollected = false;
 				Rectangle c1 = new Rectangle(72, 154, 25, 25);
 				Rectangle c2 = new Rectangle(235, 106, 25, 25);
 				Rectangle c3 = new Rectangle(72, 69, 25, 25);
-				Rectangle c4 = new Rectangle(235, 30, 25, 25);
+				Rectangle c4 = new Rectangle(78, 31, 25, 25);
 				Rectangle c5 = new Rectangle(598, 77, 25, 25);
 				Rectangle c6 = new Rectangle(598, 106, 25, 25);
 				Rectangle c7 = new Rectangle(598, 139, 25, 25);
@@ -88,6 +89,7 @@ public class Play3 extends BasicGameState{
 		public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 			box = new Image("res/box.png");
 			key = new Image("res/key.png");
+			coin = new Image("res/coin.png");
 			
 			w1 = new Rectangle(29, 30, 44, 170);
 				w1c1 = new Rectangle(29, 30, 22, 170);
@@ -122,7 +124,7 @@ public class Play3 extends BasicGameState{
 				i++;
 				livesX += 20;
 			}
-			g.drawString("Score: "+score, 470, 15);
+			g.drawString("Score: "+Game.gscore, 470, 15);
 			g.drawString("Level 3", 270, 10);
 
 			//Walls
@@ -134,14 +136,13 @@ public class Play3 extends BasicGameState{
 			g.setColor(Color.white);
 			
 			//Collectibles
-			g.setColor(Color.magenta);
-			if(drawIt1 == true){g.fill(c1);}
-			if(drawIt2 == true){g.fill(c2);}
-			if(drawIt3 == true){g.fill(c3);}
-			if(drawIt4 == true){g.drawImage(key, 235, 30);}
-			if(drawIt5 == true){g.fill(c5);}
-			if(drawIt6 == true){g.fill(c6);}
-			if(drawIt7 == true){g.fill(c7);}
+			if(drawIt1 == true){g.drawImage(coin, 72, 154);}
+			if(drawIt2 == true){g.drawImage(coin, 235, 106);}
+			if(drawIt3 == true){g.drawImage(coin, 72, 69);}
+			if(drawIt5 == true){g.drawImage(coin, 598, 77);}
+			if(drawIt4 == true){g.drawImage(key, 78, 31);}
+			if(drawIt6 == true){g.drawImage(coin, 598, 106);}
+			if(drawIt7 == true){g.drawImage(coin, 598, 139);}
 			
 			//Enemys
 			g.setColor(Color.cyan);
@@ -166,6 +167,11 @@ public class Play3 extends BasicGameState{
 		public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
 			Input input = gc.getInput();
 			
+			timer += delta;
+			
+			while(timer > 5){
+				timer -= 5;
+			
 			if(drawItenemy == true){
 				if(boxrect.intersects(enemyrect4)){
 					boxX -= 1;
@@ -181,22 +187,12 @@ public class Play3 extends BasicGameState{
 				dir = 'r';
 			}
 			if(dir == 'l'){
-				try{
-					Thread.sleep(5);
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
+				
 				enemyX -= 1;
 				enemyrect.setX(enemyX);
 			}
 			if(dir == 'r'){
-				try{
-					Thread.sleep(5);
-				}
-				catch(Exception e){
-					e.printStackTrace();
-				}
+				
 				enemyX += 1;
 				enemyrect.setX(enemyX);
 			}
@@ -274,21 +270,21 @@ public class Play3 extends BasicGameState{
 			
 			if(boxrect.intersects(c1)){
 				if(scoreIt1 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt1 = false;
 				}
 				drawIt1 = false;
 			}
 			if(boxrect.intersects(c2)){
 				if(scoreIt2 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt2 = false;
 				}
 				drawIt2 = false;
 			}
 			if(boxrect.intersects(c3)){
 				if(scoreIt3 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt3 = false;
 				}
 				drawIt3 = false;
@@ -299,21 +295,21 @@ public class Play3 extends BasicGameState{
 			}
 			if(boxrect.intersects(c5)){
 				if(scoreIt5 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt5 = false;
 				}
 				drawIt5 = false;
 			}
 			if(boxrect.intersects(c6)){
 				if(scoreIt6 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt6 = false;
 				}
 				drawIt6 = false;
 			}
 			if(boxrect.intersects(c7)){
 				if(scoreIt7 == true){
-					score += 10;
+					Game.gscore += 10;
 					scoreIt7 = false;
 				}
 				drawIt7 = false;
@@ -323,21 +319,23 @@ public class Play3 extends BasicGameState{
 				allboxescollected = true;
 			}
 			
-			if(input.isKeyDown(Input.KEY_UP)){
-				boxY -= 1;
-				boxrect.setY(boxY);
-			}
-			if(input.isKeyDown(Input.KEY_DOWN)){
-				boxY += 1;
-				boxrect.setY(boxY);
-			}
-			if(input.isKeyDown(Input.KEY_LEFT)){
-				boxX -= 1;
-				boxrect.setX(boxX);
-			}
-			if(input.isKeyDown(Input.KEY_RIGHT)){
-				boxX += 1;
-				boxrect.setX(boxX);
+			if(quit == false){
+				if(input.isKeyDown(Input.KEY_UP)){
+					boxY -= 1;
+					boxrect.setY(boxY);
+				}
+				if(input.isKeyDown(Input.KEY_DOWN)){
+					boxY += 1;
+					boxrect.setY(boxY);
+				}
+				if(input.isKeyDown(Input.KEY_LEFT)){
+					boxX -= 1;
+					boxrect.setX(boxX);
+				}
+				if(input.isKeyDown(Input.KEY_RIGHT)){
+					boxX += 1;
+					boxrect.setX(boxX);
+				}
 			}
 			
 			if(boxY < 30){
@@ -411,6 +409,7 @@ public class Play3 extends BasicGameState{
 				sbg.enterState(5);
 			}
 			
+			}
 		}
 		
 		public int getID(){
