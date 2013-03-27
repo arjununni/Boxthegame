@@ -3,7 +3,7 @@
 
 <h2>Description:</h2>
 
-This is a small game made by me on a very boring day. Rules are simple: Collect the violet boxes, Avoid the blue boxes, and reach the white box.
+This is a small game made by me on a very boring day. Rules are simple: Collect the violet coins, Avoid the blue boxes, and reach the white box.
   
 You can fork it and do whatever you want with it!
   
