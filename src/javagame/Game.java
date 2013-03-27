@@ -14,6 +14,7 @@ public class Game extends StateBasedGame{
 	public static final int play3 = 5;
 	public static final int play4 = 6;
 	public static int gscore = 0;
+	public static boolean gconfusion = false;
 	
 	public Game(String gamename){
 		

@@ -25,9 +25,10 @@ public class Menu extends BasicGameState{
 		public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
 			
 			g.drawImage(logo, 200, 40);
-			g.drawString("'Enter' to start", 210, 170);
-			g.drawString("'Q' to quit", 210, 220);
-			g.drawString("'H' for help", 210, 270);
+			g.drawString("'Enter' to start in normal", 210, 170);
+			g.drawString("'C' to start  in confusion mode", 210, 220);
+			g.drawString("'Q' to quit", 210, 270);
+			g.drawString("'H' for help", 210, 3200);
 		}
 		
 		public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
@@ -43,6 +44,11 @@ public class Menu extends BasicGameState{
 			}
 			if(input.isKeyDown(Input.KEY_H)){
 				sbg.enterState(2);
+			}
+			if(input.isKeyDown(Input.KEY_C)){
+				Game.gconfusion = true;
+				sbg.enterState(1);
+				bgMusic.stop();
 			}
 			if(input.isKeyDown(Input.KEY_O)){
 				sbg.enterState(6);

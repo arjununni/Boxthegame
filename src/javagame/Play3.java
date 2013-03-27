@@ -320,23 +320,45 @@ public class Play3 extends BasicGameState{
 			}
 			
 			if(quit == false){
-				if(input.isKeyDown(Input.KEY_UP)){
-					boxY -= 1;
-					boxrect.setY(boxY);
+				if(Game.gconfusion == false){
+					if(input.isKeyDown(Input.KEY_UP)){
+						boxY -= 1;
+						boxrect.setY(boxY);
+					}
+					if(input.isKeyDown(Input.KEY_DOWN)){
+						boxY += 1;
+						boxrect.setY(boxY);
+					}
+					if(input.isKeyDown(Input.KEY_LEFT)){
+						boxX -= 1;
+						boxrect.setX(boxX);
+					}
+					if(input.isKeyDown(Input.KEY_RIGHT)){
+						boxX += 1;
+						boxrect.setX(boxX);
+					}
 				}
-				if(input.isKeyDown(Input.KEY_DOWN)){
-					boxY += 1;
-					boxrect.setY(boxY);
-				}
-				if(input.isKeyDown(Input.KEY_LEFT)){
-					boxX -= 1;
-					boxrect.setX(boxX);
-				}
-				if(input.isKeyDown(Input.KEY_RIGHT)){
-					boxX += 1;
-					boxrect.setX(boxX);
+				
+				if(Game.gconfusion == true){
+					if(input.isKeyDown(Input.KEY_UP)){
+						boxY += 1;
+						boxrect.setY(boxY);
+					}
+					if(input.isKeyDown(Input.KEY_DOWN)){
+						boxY -= 1;
+						boxrect.setY(boxY);
+					}
+					if(input.isKeyDown(Input.KEY_LEFT)){
+						boxX += 1;
+						boxrect.setX(boxX);
+					}
+					if(input.isKeyDown(Input.KEY_RIGHT)){
+						boxX -= 1;
+						boxrect.setX(boxX);
+					}
 				}
 			}
+			
 			
 			if(boxY < 30){
 				boxY += 4;
