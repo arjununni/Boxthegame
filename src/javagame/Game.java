@@ -1,5 +1,6 @@
 package javagame;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -49,6 +50,7 @@ public class Game extends StateBasedGame{
 		try{
 			appgc = new AppGameContainer(new Game(gamename));
 			appgc.setDisplayMode(640, 360, false);
+			Display.setResizable(true);
 			appgc.start();
 			appgc.setTargetFrameRate(60);
 		}catch(SlickException e){
